@@ -9,4 +9,14 @@ public class Degree {
     float cgpa;
     boolean backlog;
     boolean complete;
+
+    public Degree(String degreeName, String major, double gpa) {
+    }
+
+    public Degree() {
+
+    }
+
+    public Degree(String degreeName, String major, String gpa) {
+    }
 }

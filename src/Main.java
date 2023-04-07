@@ -1,41 +1,34 @@
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
-public class Main extends JFrame implements ActionListener {
-    private JTextField inputField;
-    private JButton submitButton;
-    private JTextField outputField;
-    private JComboBox<String> comboBox;
 
-    public Main(){
-        setTitle("Base64 Password Generator");
-        setSize(1000, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Set up the input field
-        inputField = new JTextField(20);
+public class Main extends JFrame {
+    public Main() {
+        super("My Form");
 
-        // Set up the submit button
-        submitButton = new JButton("Submit");
-        submitButton.addActionListener(this);
+        // Create components
+        JLabel labelName = new JLabel("Name:");
+        JTextField textFieldName = new JTextField(20);
+        JLabel labelEmail = new JLabel("Email:");
+        JTextField textFieldEmail = new JTextField(20);
+        JButton buttonSubmit = new JButton("Submit");
 
-        // Add components to the JFrame
+        // Set layout
         setLayout(new FlowLayout());
-        add(inputField);
-        add(submitButton);
 
-        // Display the JFrame
+        // Add components to form
+        add(labelName);
+        add(textFieldName);
+        add(labelEmail);
+        add(textFieldEmail);
+        add(buttonSubmit);
+
+        // Set form properties
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        new Main();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
+        Main form = new Main();
     }
 }

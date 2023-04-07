@@ -1,5 +1,5 @@
 public class Summary {
-    String skills;
-    String experience;
-    String goals;
+    static String skills;
+    static String experience;
+    static String goals;
 }
