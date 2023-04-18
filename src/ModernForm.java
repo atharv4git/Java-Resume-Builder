@@ -69,6 +69,8 @@ public class ModernForm {
         JPanel panel4 = new JPanel();
         JPanel panel5 = new JPanel();
         JPanel panel6 = new JPanel();
+
+        JFrame frame1 = new JFrame();
         tabbedPane.addTab("Contact Information", panel1);
         tabbedPane.addTab("Work Experience", panel2);
         tabbedPane.addTab("Skills", panel3);
@@ -83,10 +85,10 @@ public class ModernForm {
         panel1.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-// Set insets (padding) for components
+        // Set insets (padding) for components
         gbc.insets = new Insets(5, 5, 5, 5);
 
-// Add label and text field for name
+        // Add label and text field for name
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel1.add(labelName, gbc);
@@ -94,7 +96,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(nameTextField, gbc);
 
-// Add label and text field for phone number
+        // Add label and text field for phone number
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel1.add(labelPhone, gbc);
@@ -102,7 +104,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(phoneTextField, gbc);
 
-// Add label and text field for email
+        // Add label and text field for email
         gbc.gridx = 0;
         gbc.gridy = 2;
         panel1.add(labelEmail, gbc);
@@ -110,7 +112,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(emailTextField, gbc);
 
-// Add label and text field for address
+        // Add label and text field for address
         gbc.gridx = 0;
         gbc.gridy = 3;
         panel1.add(labelAddress, gbc);
@@ -118,7 +120,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(addressTextField, gbc);
 
-// Add label and text field for LinkedIn
+        // Add label and text field for LinkedIn
         gbc.gridx = 0;
         gbc.gridy = 4;
         panel1.add(labelLinkedin, gbc);
@@ -126,7 +128,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(linkedinTextField, gbc);
 
-// Add label and text field for Twitter
+        // Add label and text field for Twitter
         gbc.gridx = 0;
         gbc.gridy = 5;
         panel1.add(labelTwitter, gbc);
@@ -134,7 +136,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(twitterTextField, gbc);
 
-// Add label and text field for GitHub
+        // Add label and text field for GitHub
         gbc.gridx = 0;
         gbc.gridy = 6;
         panel1.add(labelGH, gbc);
@@ -142,7 +144,7 @@ public class ModernForm {
         gbc.gridx = 1;
         panel1.add(githubTextField, gbc);
 
-// Add submit button
+        // Add submit button
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 2;
@@ -150,11 +152,11 @@ public class ModernForm {
         JButton button = new JButton("Submit");
         button.setBackground(Color.BLUE);
         button.setForeground(Color.WHITE);
-        panel1.add(buttonSubmit, gbc);
+        panel1.add(button, gbc);
 
         panel1.setVisible(true);
 
-        buttonSubmit.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 saveContactInfo();
             }
@@ -215,10 +217,12 @@ public class ModernForm {
         panel4.setLayout(new GridBagLayout());
         GridBagConstraints gbc4 = new GridBagConstraints();
 
-// Set insets (padding) for components
+        // Set insets (padding) for components
         gbc4.insets = new Insets(5, 5, 5, 5);
 
-// Add label and text field for school name
+//        frame1.add(panel4);
+
+        // Add label and text field for school name
         gbc4.gridx = 0;
         gbc4.gridy = 0;
         panel4.add(labelSchoolName, gbc4);
@@ -226,7 +230,7 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(schoolNameTextField, gbc4);
 
-// Add label and text field for degree name
+        // Add label and text field for degree name
         gbc4.gridx = 0;
         gbc4.gridy = 1;
         panel4.add(labelDegreeName, gbc4);
@@ -234,7 +238,7 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(degreeNameTextField, gbc4);
 
-// Add label and text field for major
+        // Add label and text field for major
         gbc4.gridx = 0;
         gbc4.gridy = 2;
         panel4.add(labelMajor, gbc4);
@@ -242,7 +246,7 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(majorTextField, gbc4);
 
-// Add label and text field for GPA
+        // Add label and text field for GPA
         gbc4.gridx = 0;
         gbc4.gridy = 3;
         panel4.add(labelGPA, gbc4);
@@ -250,7 +254,7 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(gpaTextField, gbc4);
 
-// Add label and text field for certification name
+        // Add label and text field for certification name
         gbc4.gridx = 0;
         gbc4.gridy = 4;
         panel4.add(labelCertificationName, gbc4);
@@ -258,7 +262,7 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(certificationNameTextField, gbc4);
 
-// Add label and text field for certification authority
+        // Add label and text field for certification authority
         gbc4.gridx = 0;
         gbc4.gridy = 5;
         panel4.add(labelCertificationAuthority, gbc4);
@@ -266,7 +270,7 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(certificationAuthorityTextField, gbc4);
 
-// Add label and text field for certification date
+        // Add label and text field for certification date
         gbc4.gridx = 0;
         gbc4.gridy = 6;
         panel4.add(labelCertificationDate, gbc4);
@@ -274,21 +278,21 @@ public class ModernForm {
         gbc4.gridx = 1;
         panel4.add(certificationDateTextField, gbc4);
 
-// Add submit button
+        // Add submit button
         gbc4.gridx = 0;
         gbc4.gridy = 7;
         gbc4.gridwidth = 2;
         gbc4.anchor = GridBagConstraints.CENTER;
         panel4.add(buttonSubmit, gbc4);
 
-// Add button for adding more certificates
+        // Add button for adding more certificates
         gbc4.gridx = 0;
         gbc4.gridy = 8;
         gbc4.gridwidth = 1;
         gbc4.anchor = GridBagConstraints.LINE_END;
         panel4.add(buttonAddCertificate, gbc4);
 
-// Add button for adding more degrees
+        // Add button for adding more degrees
         gbc4.gridx = 1;
         gbc4.anchor = GridBagConstraints.LINE_START;
         panel4.add(buttonAddDegree, gbc4);
@@ -375,7 +379,7 @@ public class ModernForm {
 
 
 
-// Display the JFrame
+    // Display the JFrame
         frame.setVisible(true);
 
     }
@@ -449,8 +453,4 @@ public class ModernForm {
             e.printStackTrace();
         }
     }
-
-
-
-
 }
