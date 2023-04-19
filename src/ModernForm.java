@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import static java.lang.Math.max;
 
 
@@ -19,6 +19,7 @@ public class ModernForm {
     static JLabel labelGH = new JLabel("GitHub:");
     static JLabel labelLinkedin = new JLabel("LinkedIn:");
     static JLabel labelPhone = new JLabel("Phone No.:");
+    static JTextField jobTitleTextField = new JTextField(20);
     static JTextField nameTextField = new JTextField(20);
     static JTextField addressTextField = new JTextField(20);
     static JTextField twitterTextField = new JTextField(20);
@@ -27,6 +28,20 @@ public class ModernForm {
     static JTextField phoneTextField = new JTextField(20);
     static JTextField emailTextField = new JTextField(20);
     static JButton buttonSubmit = new JButton("Submit");
+
+    static JLabel labelCompanyName = new JLabel("Company Name:");
+    static JLabel labelLocation = new JLabel("Location:");
+    static JLabel labelStartDate = new JLabel("Start Date:");
+    static JLabel labelEndDate = new JLabel("End Date:");
+    static JLabel labelJobTitle = new JLabel("Job Title:");
+    static JLabel labelDescription = new JLabel("Description:");
+    static JTextField companyNameTextField = new JTextField(20);
+    static JTextField locationTextField = new JTextField(20);
+    static JTextField startDateTextField = new JTextField(20);
+    static JTextField endDateTextField = new JTextField(20);
+    static JTextArea descriptionTextField = new JTextArea(5, 20);
+    static JButton buttonSubmit2 = new JButton("Submit");
+
 
     static JLabel labelSkills = new JLabel("Skills:");
     static JLabel labelExperience = new JLabel("Experience:");
@@ -165,6 +180,89 @@ public class ModernForm {
 
         saveContactInfo();
 
+        // Set layout for panel2
+        panel2.setLayout(new GridBagLayout());
+        GridBagConstraints gbc2 = new GridBagConstraints();
+
+// Set insets (padding) for components
+        gbc2.insets = new Insets(5, 5, 5, 5);
+
+// Add label and text field for job title
+        JLabel labelJobTitle = new JLabel("Job Title:");
+        gbc2.gridx = 0;
+        gbc2.gridy = 0;
+        panel2.add(labelJobTitle, gbc2);
+
+        JTextField jobTitleTextField = new JTextField(20);
+        gbc2.gridx = 1;
+        panel2.add(jobTitleTextField, gbc2);
+
+// Add label and text field for company name
+        JLabel labelCompanyName = new JLabel("Company Name:");
+        gbc2.gridx = 0;
+        gbc2.gridy = 1;
+        panel2.add(labelCompanyName, gbc2);
+
+        JTextField companyNameTextField = new JTextField(20);
+        gbc2.gridx = 1;
+        panel2.add(companyNameTextField, gbc2);
+
+// Add label and text field for start date
+        JLabel labelStartDate = new JLabel("Start Date:");
+        gbc2.gridx = 0;
+        gbc2.gridy = 2;
+        panel2.add(labelStartDate, gbc2);
+
+        JTextField startDateTextField = new JTextField(20);
+        gbc2.gridx = 1;
+        panel2.add(startDateTextField, gbc2);
+
+// Add label and text field for end date
+        JLabel labelEndDate = new JLabel("End Date:");
+        gbc2.gridx = 0;
+        gbc2.gridy = 3;
+        panel2.add(labelEndDate, gbc2);
+
+        JTextField endDateTextField = new JTextField(20);
+        gbc2.gridx = 1;
+        panel2.add(endDateTextField, gbc2);
+
+// Add label and text field for location
+        JLabel labelLocation = new JLabel("Location:");
+        gbc2.gridx = 0;
+        gbc2.gridy = 4;
+        panel2.add(labelLocation, gbc2);
+
+        JTextField locationTextField = new JTextField(20);
+        gbc2.gridx = 1;
+        panel2.add(locationTextField, gbc2);
+
+// Add label and text field for description
+        JLabel labelDescription = new JLabel("Description:");
+        gbc2.gridx = 0;
+        gbc2.gridy = 5;
+        panel2.add(labelDescription, gbc2);
+
+        JTextArea descriptionTextField = new JTextArea(5, 20);
+        descriptionTextField.setLineWrap(true);
+        gbc2.gridx = 1;
+        panel2.add(new JScrollPane(descriptionTextField), gbc2);
+
+// Add submit button
+        JButton buttonSubmit2 = new JButton("Add Job");
+        gbc2.gridx = 0;
+        gbc2.gridy = 6;
+        gbc2.gridwidth = 2;
+        gbc2.anchor = GridBagConstraints.CENTER;
+        panel2.add(buttonSubmit2, gbc2);
+
+        buttonSubmit2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                saveWorkExperience();
+            }
+        });
+
+
         // Display the JFrame
         frame.setVisible(true);
 
@@ -207,7 +305,7 @@ public class ModernForm {
 
         buttonSubmit3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                saveSummary();
+                saveSkills();
             }
         });
 
@@ -409,20 +507,85 @@ public class ModernForm {
         }
     }
 
-    public static void saveSummary() {
-        Summary.skills = skillsTextArea.getText();
-        Summary.experience = experienceTextArea.getText();
-        Summary.goals = goalsTextArea.getText();
+    private static void saveWorkExperience() {
+        // Read input data from text fields
+        String companyName = companyNameTextField.getText().trim();
+        String location = locationTextField.getText().trim();
+        String startDate = startDateTextField.getText().trim();
+        String endDate = endDateTextField.getText().trim();
+        String description = descriptionTextField.getText().trim();
+
+        // Validate input data
+        if (companyName.isEmpty() || location.isEmpty() || startDate.isEmpty() || endDate.isEmpty() || description.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill out all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Create a CSV file if it doesn't exist
+        File file = new File("WorkExperience.csv");
+        boolean fileExists = file.exists();
+        FileWriter writer = null;
         try {
-            FileWriter writer = new FileWriter("summary.csv");
-            writer.write(Summary.skills + ",");
-            writer.write(Summary.experience + ",");
-            writer.write(Summary.goals);
+            writer = new FileWriter(file, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to write data to CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!fileExists) {
+            try {
+                writer.write("Company Name,Location,Start Date,End Date,Description\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Failed to write data to CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+                try {
+                    writer.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                return;
+            }
+        }
+
+        // Write work experience data to CSV file
+        try {
+            writer.write(companyName + ",");
+            writer.write(location + ",");
+            writer.write(startDate + ",");
+            writer.write(endDate + ",");
+            writer.write(description + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to write data to CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        // Clear input fields
+        companyNameTextField.setText("");
+        locationTextField.setText("");
+        startDateTextField.setText("");
+        endDateTextField.setText("");
+        descriptionTextField.setText("");
+
+        // Show confirmation message
+        JOptionPane.showMessageDialog(null, "Work experience added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
+
+
+    private static boolean isValidDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(date);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+
+
 
     private static void saveEducation() {
         String schoolName = schoolNameTextField.getText();
@@ -453,4 +616,106 @@ public class ModernForm {
             e.printStackTrace();
         }
     }
+
+    private static void saveSkills() {
+        // Read input data from text area
+        String skills = skillsTextArea.getText().trim();
+
+        // Validate input data
+        if (skills.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill out the skills field.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Create a CSV file if it doesn't exist
+        File file = new File("Skills.csv");
+        if (!file.exists()) {
+            try {
+                FileWriter writer = new FileWriter(file);
+                writer.write("Skills\n");
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Failed to create CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Write skills data to CSV file
+        try {
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(skills + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to write data to CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Clear input field
+        skillsTextArea.setText("");
+
+        // Show confirmation message
+        JOptionPane.showMessageDialog(null, "Skills added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
+
+//    private static void saveWorkExperience() {
+//        // Read input data from text fields
+//        String companyName = companyNameTextField.getText().trim();
+//        String location = locationTextField.getText().trim();
+//        String startDate = startDateTextField.getText().trim();
+//        String endDate = endDateTextField.getText().trim();
+//        String description = descriptionTextField.getText().trim();
+//
+//        // Validate input data
+//        if (companyName.isEmpty() || location.isEmpty() || startDate.isEmpty() || endDate.isEmpty() || description.isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Please fill out all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+//
+//        // Create a CSV file if it doesn't exist
+//        File file = new File("WorkExperience.csv");
+//        if (!file.exists()) {
+//            try {
+//                FileWriter writer = new FileWriter(file);
+//                writer.write("Company Name,Location,Start Date,End Date,Description\n");
+//                writer.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                JOptionPane.showMessageDialog(null, "Failed to create CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//        }
+//
+//        // Write work experience data to CSV file
+//        try {
+//            FileWriter writer = new FileWriter(file, true);
+//            writer.write(companyName + ",");
+//            writer.write(location + ",");
+//            writer.write(startDate + ",");
+//            writer.write(endDate + ",");
+//            writer.write(description + "\n");
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(null, "Failed to write data to CSV file.", "Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+//
+//        // Clear input fields
+//        companyNameTextField.setText("");
+//        locationTextField.setText("");
+//        startDateTextField.setText("");
+//        endDateTextField.setText("");
+//        descriptionTextField.setText("");
+//
+//        // Show confirmation message
+//        JOptionPane.showMessageDialog(null, "Work experience added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+//    }
+
+
+
+
 }

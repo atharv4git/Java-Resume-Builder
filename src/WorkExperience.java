@@ -8,4 +8,7 @@ public class WorkExperience {
     LocalDate end_date = LocalDate.of(0, 0, 0);
     boolean currently_working_here;
     String summary;
+
+    public WorkExperience(String companyName, String location, String startDate, String endDate, String description) {
+    }
 }
