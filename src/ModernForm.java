@@ -69,6 +69,14 @@ public class ModernForm {
     static JButton buttonAddCertificate = new JButton("Add Certificate");
     static JButton buttonAddDegree = new JButton("Add Degree");
 
+    static JLabel title = new JLabel("Title");
+    static JTextField titletext = new JTextField(20);
+    static JLabel by = new JLabel("by");
+    static JTextField bytext = new JTextField(20);
+    static JLabel pos = new JLabel("position");
+    static JTextField postext = new JTextField(20);
+    static JButton buttonAddAward = new JButton("Add Degree");
+
 
     public static void main(String[] args) {
         // Create a JFrame and set its properties
@@ -473,6 +481,35 @@ public class ModernForm {
                 degreeCount[0]++;
             }
         });
+
+        frame.setVisible(true);
+
+        panel5.setLayout(new GridBagLayout());
+        GridBagConstraints gbc5 = new GridBagConstraints();
+
+        // Set insets (padding) for components
+        gbc5.insets = new Insets(2, 2, 2, 2);
+
+        gbc5.gridx = 0;
+        gbc5.gridy = 0;
+        panel5.add(title, gbc5);
+
+        gbc5.gridx = 1;
+        panel5.add(titletext, gbc5);
+
+        gbc5.gridx = 0;
+        gbc5.gridy = 1;
+        panel5.add(by, gbc5);
+
+        gbc5.gridx = 1;
+        panel5.add(bytext, gbc5);
+
+        gbc5.gridx = 0;
+        gbc5.gridy = 2;
+        panel5.add(pos, gbc5);
+
+        gbc5.gridx = 1;
+        panel5.add(postext, gbc5);
 
 
 
